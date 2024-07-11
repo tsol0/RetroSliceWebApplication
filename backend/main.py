@@ -39,3 +39,23 @@ def create_customer():
     
     return jsonify({"message": "User created!"}), 201
 
+@app.route("/update_customer/<string:name>", methods=["PATCH"])
+def update_customer(name):
+    customer = Customer.query.get(name)
+    
+    if not customer:
+        return jsonify({"message": "User not found"}), 404
+    
+    data = request.json
+    customer.name = data.get("name", customer.name)
+    customer.age = data.get("age", customer.age)
+    customer.arcade_score = data.get("arcadeScore", customer.arcade_score)
+    customer.bowling_score = data.get("bowlingScore", customer.bowling_score)
+    customer.pizzas_consumed = data.get("pizzasConsumed", customer.pizzas_consumed)
+    customer.slushy_preference = data.get("slushyPreference", customer.slushy_preference)
+    customer.slushies_consumed = data.get("slushiesConsumed", customer.slushies_consumed)
+    customer.employed = data.get("employed", customer.employed)
+    customer.email = data.get("email", customer.email)
+    
+    db.session.commit()
+    return jsonify({"message": "User updated"}), 200
