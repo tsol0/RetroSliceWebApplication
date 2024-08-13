@@ -28,8 +28,27 @@ const Customer = ({ existingCustomer = {}, updateCallback}) => {
         }
 
         const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingCustomer.name}` : `create_contact`) 
-        
+        const options = {
+            method: updating ? "PATCH" : "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:  JSON.stringify(data)
+        }
         const response = await fetch(url, options)
 
+        if (response.status !== 201 && response.status !== 200){
+            const data = await response.json()
+            alert(data.message)
+        } else updateCallback()
+
     }
+    return (
+        <form onSubmit={onSubmit} >
+            <div>
+                <label htmlFor="
+                "></label>
+            </div>
+        </form>
+    )
 }
