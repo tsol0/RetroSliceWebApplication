@@ -19,12 +19,11 @@ const CustomerList = ({ customers, updateCustomer, updateCallback}) => {
                         <tr key={customer.id}>
                             <td>{customer.name}</td>
                             <td>{customer.age}</td>
-                            <td>{customer.employed}</td>
                             <td>{customer.email}</td>
-                            {/* <td>
+                            <td>
                                 <button onClick={""}>Update</button>
                                 <button onClick={""}>Delete</button>
-                            </td> */}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
